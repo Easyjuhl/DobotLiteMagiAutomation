@@ -28,5 +28,11 @@ class graphicDobot(Tk.Frame):
         pos3 = tk.Button(self, bg = pos3col, command = , Height = ButtHeight, Width = Buttwidth)
 
         pos4col = "Black"
-        pos4 = tk.Button(self, bg = pos1col, command = , Height = ButtHeight, Width = Buttwidth)
+        pos4 = tk.Button(self, bg = pos4col, command = , Height = ButtHeight, Width = Buttwidth)
+
+    def FinishOrder(self):
+        Order = ''
+        OrderInList=[]
+
         
+
