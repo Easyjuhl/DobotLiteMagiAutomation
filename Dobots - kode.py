@@ -36,67 +36,68 @@ port = available_ports[0].device
 
 device = pydobot.Dobot(port=port, verbose=False)
 
+def orderhandler(order):
+    rednr=0
+    greennr=0
+    bluenr=0
+    yellownr=0
 
-rednr=0
-greennr=0
-bluenr=0
-yellownr=0
+    placement = 0
 
-order = "0110133140040440"
-placement = 0
+    for brik in order:
+        placement += 1
+        if brik=="0":
+            pass
 
-for brik in order:
-    placement += 1
-    if brik=="0":
-        pass
+        elif brik=="1":
+            pick(0,20*rednr)
+            rednr += 1
+            if placement < 5:
+                place(20*(placement-1),0)
+            elif placement < 9:
+                place(20*(placement-5),20)
+            elif placement < 13:
+                place(20*(placement-9),40)
+            else:
+                place(20*(placement-13),60)
 
-    elif brik=="1":
-        pick(0,20*rednr)
-        rednr += 1
-        if placement < 5:
-            place(20*(placement-1),0)
-        elif placement < 9:
-            place(20*(placement-5),20)
-        elif placement < 13:
-            place(20*(placement-9),40)
-        else:
-            place(20*(placement-13),60)
-
-    elif brik=="2":
-        pick(20,20*greennr)
-        greennr += 1
-        if placement < 5:
-            place(20*(placement-1),0)
-        elif placement < 9:
-            place(20*(placement-5),20)
-        elif placement < 13:
-            place(20*(placement-9),40)
-        else:
-            place(20*(placement-13),60)
+        elif brik=="2":
+            pick(20,20*greennr)
+            greennr += 1
+            if placement < 5:
+                place(20*(placement-1),0)
+            elif placement < 9:
+                place(20*(placement-5),20)
+            elif placement < 13:
+                place(20*(placement-9),40)
+            else:
+                place(20*(placement-13),60)
 
 
-    elif brik=="3":
-        pick(40,20*bluenr)
-        bluenr += 1
-        if placement < 5:
-            place(20*(placement-1),0)
-        elif placement < 9:
-            place(20*(placement-5),20)
-        elif placement < 13:
-            place(20*(placement-9),40)
-        else:
-            place(20*(placement-13),60)
+        elif brik=="3":
+            pick(40,20*bluenr)
+            bluenr += 1
+            if placement < 5:
+                place(20*(placement-1),0)
+            elif placement < 9:
+                place(20*(placement-5),20)
+            elif placement < 13:
+                place(20*(placement-9),40)
+            else:
+                place(20*(placement-13),60)
 
-    elif brik=="4":
-        pick(60,20*yellownr)
-        yellownr += 1
-        if placement < 5:
-            place(20*(placement-1),0)
-        elif placement < 9:
-            place(20*(placement-5),20)
-        elif placement < 13:
-            place(20*(placement-9),40)
-        else:
-            place(20*(placement-13),60)
+        elif brik=="4":
+            pick(60,20*yellownr)
+            yellownr += 1
+            if placement < 5:
+                place(20*(placement-1),0)
+            elif placement < 9:
+                place(20*(placement-5),20)
+            elif placement < 13:
+                place(20*(placement-9),40)
+            else:
+                place(20*(placement-13),60)
+
+orderhandler("0110133140040440")
 
 device.close()

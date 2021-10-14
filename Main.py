@@ -1,11 +1,12 @@
 import sqlite3
-import Tkinter as tk
+import tkinter as tk
+from tkinter import messagebox
 
 con = sqlite3.connect('Data.db')
 print("Data being stored")
 
 try:
-    con.execute("""CREATE TABLE current
+    con.execute("""CREATE TABLE orders
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     order STRING,
     orderstatus INTEGER""")
@@ -16,75 +17,110 @@ class graphicDobot(Tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
 
-        ButtHeight = 50
-        Buttwidth = 50
+        ButtHeight = 8
+        Buttwidth = 20
 
         self.pos1col = "Black"
-        pos1 = tk.Button(self, bg = self.pos1col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos2col = "Black"
-        pos2 = tk.Button(self, bg = self.pos2col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos3col = "Black"
-        pos3 = tk.Button(self, bg = self.pos3col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos4col = "Black"
-        pos4 = tk.Button(self, bg = self.pos4col, command = , Height = ButtHeight, Width = Buttwidth)
-
-        self.pos5col = "Black"
-        pos5 = tk.Button(self, bg = self.pos5col, command = , Height = ButtHeight, Width = Buttwidth)
-
+        self.pos5col = "Black"        
         self.pos6col = "Black"
-        pos2 = tk.Button(self, bg = self.pos6col, command = , Height = ButtHeight, Width = Buttwidth)
-
-        self.pos7col = "Black"
-        pos7 = tk.Button(self, bg = self.pos7col, command = , Height = ButtHeight, Width = Buttwidth)
-
+        self.pos7col = "Black"        
         self.pos8col = "Black"
-        pos8 = tk.Button(self, bg = self.pos8col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos9col = "Black"
-        pos9 = tk.Button(self, bg = self.pos9col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos10col = "Black"
-        pos10 = tk.Button(self, bg = self.pos10col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos11col = "Black"
-        pos11 = tk.Button(self, bg = self.pos11col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos12col = "Black"
-        pos12 = tk.Button(self, bg = self.pos12col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos13col = "Black"
-        pos13 = tk.Button(self, bg = self.pos13col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos14col = "Black"
-        pos14 = tk.Button(self, bg = self.pos14col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos15col = "Black"
-        pos15 = tk.Button(self, bg = self.pos15col, command = , Height = ButtHeight, Width = Buttwidth)
-
         self.pos16col = "Black"
-        pos16 = tk.Button(self, bg = self.pos16col, command = , Height = ButtHeight, Width = Buttwidth)
+
+        self.Build_GUI()
+
+    def Build_GUI(self):
+            self.pos1 = tk.Button(self, bg = self.pos1col, command = self.pos1but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos2 = tk.Button(self, bg = self.pos2col, command = self.pos2but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos3 = tk.Button(self, bg = self.pos3col, command = self.pos3but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos4 = tk.Button(self, bg = self.pos4col, command = self.pos4but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos5 = tk.Button(self, bg = self.pos5col, command = self.pos5but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos6 = tk.Button(self, bg = self.pos6col, command = self.pos6but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos7 = tk.Button(self, bg = self.pos7col, command = self.pos7but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos8 = tk.Button(self, bg = self.pos8col, command = self.pos8but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos9 = tk.Button(self, bg = self.pos9col, command = self.pos9but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos10 = tk.Button(self, bg = self.pos10col, command = self.pos10but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos11 = tk.Button(self, bg = self.pos11col, command = self.pos11but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos12 = tk.Button(self, bg = self.pos12col, command = self.pos12but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos13 = tk.Button(self, bg = self.pos13col, command = self.pos13but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos14 = tk.Button(self, bg = self.pos14col, command = self.pos14but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos15 = tk.Button(self, bg = self.pos15col, command = self.pos15but() , Height = ButtHeight, Width = Buttwidth)
+            self.pos16 = tk.Button(self, bg = self.pos16col, command = self.pos16but() , Height = ButtHeight, Width = Buttwidth)
+
+            self.FinBut = tk.Button(self, text = "Finish", command = self.FinishOrder())
+
+            self.pos1.grid(row = 0, column = 0)
+            self.pos2.grid(row = 0, column = 1)
+            self.pos3.grid(row = 0, column = 2)
+            self.pos4.grid(row = 0, column = 3)
+            self.pos5.grid(row = 1, column = 0)
+            self.pos6.grid(row = 1, column = 1)
+            self.pos7.grid(row = 1, column = 2)
+            self.pos8.grid(row = 1, column = 3)
+            self.pos9.grid(row = 2, column = 0)
+            self.pos10.grid(row = 2, column = 1)
+            self.pos11.grid(row = 2, column = 2)
+            self.pos12.grid(row = 2, column = 3)
+            self.pos13.grid(row = 3, column = 0)
+            self.pos14.grid(row = 3, column = 1)
+            self.pos15.grid(row = 3, column = 2)
+            self.pos16.grid(row = 3, column = 3)
+
+            self.FinBut.grid(row = 3, column = 4)
+            
 
     def FinishOrder(self):
         UIColors = [self.pos1col,self.pos2col,self.pos3col,self.pos4col,self.pos5col,self.pos6col,self.pos7col,self.pos8col,self.pos9col,self.pos10col,self.pos11col,self.pos12col,self.pos13col,self.pos14col,self.pos15col,self.pos16col]
         
+        redblocks = 0
+        greenblocks = 0
+        yellowblocks = 0
+        blueblocks = 0
+
         ordernr = []
 
         for i in UIColors:
             if i == "Black":
                 ordernr.append("0")
             elif i == "Red":
+                redblocks += 1
+                if redblocks > 4:
+                    continue
                 ordernr.append("1")
             elif i == "Green":
+                greenblocks += 1
+                if greenblocks > 4:
+                    continue
                 ordernr.append("2")
-            elif i == "Blue":
-                ordernr.append("3")
             elif i == "Yellow":
+                yellowblocks += 1
+                if yellowblocks > 4:
+                    continue
+                ordernr.append("3")
+            elif i == "Blue":
+                blueblocks += 1
+                if bluelocks > 4:
+                    continue
                 ordernr.append("4")
-        
+
+        if len(ordernr) != 16:
+            continue
+
         order = ''.join([str(elem) for elem in ordernr])
+
+        c = con.cursor()
+        c.execute("INSERT INTO orders (order, orderstatus) VALUES (?, ?)", (order, 0))
+
 
     def pos1but(self):
         
@@ -294,3 +330,9 @@ class graphicDobot(Tk.Frame):
                 self.pos16col = "Yellow"
             case "Yellow":
                 self.pos16col = "Black"
+
+root=tk.Tk()
+
+prg = graphicDobot()
+prg.master.title("Dobot Builder")
+prg.mainloop()
